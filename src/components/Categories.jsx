@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Categories = () => {
-  const [active, setActive] = useState();
+  const [active, setActive] = useState(0);
   const categories = ["All", "Meat", "Vegan", "Grill", "Spicy", "Closed"].map(
     (item, i) => (
       <li

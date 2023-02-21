@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 
 const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
   const typeNames = ["Thin", "Classic"];
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   return (
-    <div className="pizza-block">
+    <div className="pizza-block" key={nanoid()}>
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
@@ -14,7 +15,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
             <li
               className={activeType === i ? "active" : ""}
               onClick={() => setActiveType(i)}
-              key={`types-key-${i}`}
+              key={nanoid()}
             >
               {typeNames[item]}
             </li>
@@ -23,7 +24,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
         <ul>
           {sizes.map((item, i) => (
             <li
-              key={`sizes-key-${i}`}
+              key={nanoid()}
               className={activeSize === i ? "active" : ""}
               onClick={() => setActiveSize(i)}
             >

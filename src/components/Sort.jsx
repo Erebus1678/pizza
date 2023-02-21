@@ -1,4 +1,15 @@
+import { useState } from "react";
+import { nanoid } from "nanoid";
+
 const Sort = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [activeSort, setActiveSort] = useState(0);
+  const list = ["Popular", "Price", "Alphabet"];
+
+  const onSelect = (i) => {
+    setActiveSort(i);
+    setOpenModal(false);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -15,15 +26,23 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setOpenModal(!openModal)}>{list[activeSort]}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {openModal && (
+        <div className="sort__popup">
+          <ul>
+            {list.map((item, i) => (
+              <li
+                className={activeSort === i ? "active" : ""}
+                onClick={() => onSelect(i)}
+                key={nanoid()}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
